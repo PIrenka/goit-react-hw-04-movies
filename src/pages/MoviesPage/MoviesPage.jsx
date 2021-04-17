@@ -17,14 +17,7 @@ class MoviesPage extends Component {
   };
 
   render() {
-    const {
-      showModal,
-      images,
-      isLoading,
-      searchQuery,
-      modalURL,
-      error,
-    } = this.state;
+    // const { movies, isLoading, searchQuery } = this.state;
 
     return (
       <div>

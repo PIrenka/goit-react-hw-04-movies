@@ -1,16 +1,29 @@
 import API_KEY from './apiKey';
 import axios from 'axios';
 
-const BASE_URL = 'https://themoviedb.org/3';
+const BASE_URL = 'https://api.themoviedb.org/3';
 axios.defaults.baseURL = BASE_URL;
-axios.defaults.params = {
-  key: API_KEY,
-};
+// axios.defaults.params = {
+//   key: API_KEY,
+//   media_type: '',
+//   time_window: '',
+// };
 
-const fetchMovies = ({ media_type = 'all', time_window = 'day' }) => {
+const fetchMoviesTrend = () => {
   return axios
-    .get(`/trending/${media_type}/${time_window}`)
+    .get(`${BASE_URL}/trending/all/day?api_key=${API_KEY}`)
+    .then(({ data }) => data.results);
+};
+// const fetchMoviesTrend = ({ media_type = 'all', time_window = 'day' }) => {
+//   return axios
+//     .get(`${BASE_URL}/trending/${media_type}/${time_window}`)
+//     .then(({ data }) => data.results);
+// };
+
+const fetchMoviesByQuery = ({ media_type = 'all', time_window = 'day' }) => {
+  return axios
+    .get(`${BASE_URL}/trending/${media_type}/${time_window}`)
     .then(({ data }) => data.results);
 };
 
-export default { fetchMovies };
+export { fetchMoviesTrend, fetchMoviesByQuery };

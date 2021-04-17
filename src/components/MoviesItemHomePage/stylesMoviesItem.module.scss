@@ -1,4 +1,11 @@
 .moviesItem {
   background-color: cornflowerblue;
   color: cornsilk;
+  border-radius: 4px;
+  padding: 10px;
+
+  &:hover,
+  &:focus {
+    box-shadow: -3px 14px 38px 11px rgba(122, 233, 255, 0.77);
+  }
 }

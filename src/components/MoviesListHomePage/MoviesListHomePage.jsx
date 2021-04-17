@@ -13,6 +13,7 @@ const MoviesListHomePage = ({ movies }) => (
       </li>
     ))}
   </ul>
+
   // <ul>
   //       {movies.map(movie => (
   //         <li key={movie.id}>
