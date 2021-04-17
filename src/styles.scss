@@ -5,9 +5,18 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(169, 196, 245);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.NavLink {
+  font-size: 20px;
+  color: currentColor;
+}
+
+.NavLink--active {
+  color: palevioletred;
 }

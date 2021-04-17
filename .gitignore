@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# ignor mu Api key
+src/servicesApi/apiKey.js
