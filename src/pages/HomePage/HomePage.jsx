@@ -1,17 +1,10 @@
-// const Home = () => {
-//   return (
-//     <div className="home">
-//       <h1>Home page of HW 04 react</h1>
-//       <p>put here elements and trending movies</p>
-//     </div>
-//   );
-// };
-
-// export default Home;
 import React, { Component } from 'react';
 import moviesApi from '../../servicesApi/movie-api';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
+import MovieDetailsPage from '../MovieDetailsPage';
+import MovieListHomePage from '../../components/MoviesListHomePage';
+import Container from '../../components/Container';
 
 class HomePage extends Component {
   state = {
@@ -37,19 +30,11 @@ class HomePage extends Component {
   render() {
     const { movies } = this.state;
     return (
-      <>
+      <Container>
         <h1>Hello HW 04-movies</h1>
-        <p>this is the start</p>
-        <ul>
-          {movies.map(movie => (
-            <li key={movie.id}>
-              {/* <NavLink to={`${this.prors.url}/${movie.id}`}> */}
-              {movie.title}
-              {/* </NavLink> */}
-            </li>
-          ))}
-        </ul>
-      </>
+        <p>movies trends by last week</p>
+        <MovieListHomePage movies={movies} />
+      </Container>
     );
   }
 }

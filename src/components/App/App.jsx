@@ -7,40 +7,42 @@ import MovieDetailsPage from '../../pages/MovieDetailsPage';
 
 const App = () => {
   return (
-    <>
-      <ul>
-        <li>
-          <NavLink
-            exact
-            to="/"
-            className="NavLink"
-            activeClassName="NavLink--active"
-            // className={styles.baseColor}
-            // activeClassName={styles.activeColor}
-          >
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            exact
-            to="/movies"
-            className="NavLink"
-            activeClassName="NavLink--active"
-            // className={styles.baseColor}
-            // activeClassName={styles.activeColor}
-          >
-            Movies
-          </NavLink>
-        </li>
-      </ul>
+    <div className={styles.App}>
+      <header className={styles.header}>
+        <ul className={styles.naviLinks}>
+          <li>
+            <NavLink
+              exact
+              to="/"
+              className="NavLink"
+              activeClassName="NavLink--active"
+              // className={styles.baseColor}
+              // activeClassName={styles.activeColor}
+            >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              exact
+              to="/movies"
+              className="NavLink"
+              activeClassName="NavLink--active"
+              // className={styles.baseColor}
+              // activeClassName={styles.activeColor}
+            >
+              Movies
+            </NavLink>
+          </li>
+        </ul>
+      </header>
 
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/movies" component={MoviesPage} />
         <Route path="/movies/:movieId" component={MovieDetailsPage} />
       </Switch>
-    </>
+    </div>
   );
 };
 

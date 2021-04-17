@@ -1,8 +1,7 @@
 .App {
   text-align: center;
 }
-
-.activeColor {
+App.module .activeColor {
   color: chocolate;
 }
 
@@ -11,4 +10,15 @@
   color: cadetblue;
 }
 
+.naviLinks {
+  list-style: none;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-around;
+}
 
+.header {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: rgb(178, 178, 252);
+}
