@@ -1,10 +1,12 @@
 import { Component } from 'react';
 import Searchbar from '../../components/Searchbar';
+import { fetchMoviesByQuery } from '../../servicesApi/movie-api';
 
 class MoviesPage extends Component {
   state = {
     movies: [],
     searchQuery: '',
+    error: null,
   };
 
   addMovies = query => {
@@ -14,6 +16,33 @@ class MoviesPage extends Component {
       //   currentPage: 1,
       //   error: null,
     });
+  };
+
+  componentDidUpdate(prevState) {
+    if (prevState.searchQuery !== this.state.searchQuery) {
+      console.log('fetching movies by search query...');
+      this.fetchMovies();
+    }
+  }
+
+  fetchMovies = () => {
+    const { searchQuery } = this.state;
+    this.setState({ isLoading: true });
+
+    if (searchQuery.length <= 2) {
+      this.setState({ isLoading: false });
+      return;
+    }
+
+    fetchMoviesByQuery({ searchQuery })
+      .then(results => {
+        console.log('results', results);
+        this.setState(prevState => ({
+          movies: [...prevState.movies, ...results],
+        }));
+      })
+      .catch(error => this.setState({ error }))
+      .finally(() => this.setState({ isLoading: false }));
   };
 
   render() {

@@ -4,6 +4,7 @@ import styles from './App.module.scss';
 import HomePage from '../../pages/HomePage';
 import MoviesPage from '../../pages/MoviesPage';
 import MovieDetailsPage from '../../pages/MovieDetailsPage';
+import NotFoundPage from '../../pages/NotFoundPage';
 import Container from '../Container';
 
 const App = () => {
@@ -44,6 +45,7 @@ const App = () => {
         <Route exact path="/" component={HomePage} />
         <Route path="/movies" component={MoviesPage} />
         <Route path="/movies/:movieId" component={MovieDetailsPage} />
+        <Route component={NotFoundPage} />
       </Switch>
     </div>
   );
