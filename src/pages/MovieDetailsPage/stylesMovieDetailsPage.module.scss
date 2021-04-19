@@ -1,0 +1,38 @@
+.infoTitle {
+  background-color: #b2b2fc;
+  color: cadetblue;
+  font-size: 20px;
+  font-weight: 900;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.movieContainer {
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.genres {
+  display: flex;
+}
+.genresItem:not(:last-child) {
+  margin-right: 10px;
+}
+
+.poster {
+  //   text-align: center;
+  margin-right: 40px;
+}
+
+.infoContainer {
+  text-align: start;
+}
+
+.extraInfoTitle {
+  margin-top: 20px;
+}
+.extraInfoText {
+  font-size: 18px;
+  text-decoration: underline solid cadetblue;
+}

@@ -1,4 +1,4 @@
-import { Route, NavLink, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import NavMenu from '../NavMenu';
 
@@ -20,7 +20,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/movies" component={MoviesPage} />
-          <Route path="/movies/:movieId" component={MovieDetailsPage} />
+          <Route exact path="/movies/:movieId" component={MovieDetailsPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </Suspense>

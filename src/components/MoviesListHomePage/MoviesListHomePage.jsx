@@ -12,7 +12,7 @@ const MoviesListHomePage = ({ movies, thisProps }) => {
       {movies.map(movie => (
         <li key={movie.id}>
           <Link to={`/movies/${movie.id}`}>
-            {/* <Link to={`/movies/:${movie.id}`} component={MovieDetailsPage}> */}
+          {/* <Link to={`/movies/${movie.id}`} component={MovieDetailsPage}> */}
             {/* <Link to={`${thisProps}/${movie.id}`}> */}
             <MoviesItemHomePage movie={movie} />
           </Link>

@@ -26,7 +26,7 @@ class Reviews extends Component {
               return <p key={id}>{content}</p>;
             })
           ) : (
-            <p>we don't have reviews</p>
+            <p>We don't have any review for this movie</p>
           )}
         </ul>
       </>

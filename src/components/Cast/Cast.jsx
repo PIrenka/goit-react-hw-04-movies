@@ -1,30 +1,41 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 
+// import { BASE_IMAGE_URL } from '../../servicesApi/movie-api';
 import { fetchMovieByCast } from '../../servicesApi/movie-api';
-
 class Cast extends Component {
   state = {
-    castA: [],
+    cast: [],
+    error: null,
   };
-  componentDidMount() {
-    console.log('Cast componentDidMount() match: ', this.props.match);
+
+  componentDidUpdate() {
+    // console.log('Cast componentDidMount() match: ', this.props.match);
     const { movieId } = this.props.match.params;
-    fetchMovieByCast(movieId).then(cast =>
-      this.setState({
-        castA: cast,
-      }),
-    );
+    // console.log('movieId: ', movieId);
+    const resCastData = fetchMovieByCast(movieId);
+    console.log('resCastData: ', resCastData);
+    //   .catch(error =>
+    //   console.log('error in fetching Cast'),
+    // );
+
+    this.setState({
+      cast: resCastData,
+    });
   }
 
   render() {
-    const { castA } = this.state;
+    const { cast } = this.state;
+    const BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/w300/';
+
     return (
       <>
         <ul>
-          {castA.map(({ name, id }) => {
+          {cast.map(({ name, character, profile_path, id }) => {
             return (
               <li key={id}>
-                <p>Name:{name}</p>{' '}
+                <img src={`${BASE_IMAGE_URL}${profile_path}`} alt={name} />
+                <p>Name:{name}</p>
+                <p>Character:{character}</p>
               </li>
             );
           })}
