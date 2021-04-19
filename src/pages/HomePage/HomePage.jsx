@@ -13,35 +13,25 @@ import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 class HomePage extends Component {
   state = {
     movies: [],
-
-    media_type: '',
-    time_window: null,
+    // genres: [],
+    // thisProps: '',
     error: null,
     isLoading: false,
   };
 
   async componentDidMount() {
-    const { error } = this.state;
-    // this.setState({ isLoading: true });
-    const res = await fetchMoviesTrend()
+    const { error, thisProps } = this.state;
+    this.setState({ isLoading: true });
+    const resTrends = await fetchMoviesTrend()
       .catch(error => console.error())
       .finally(this.setState({ isLoading: false }));
-    console.log('fetchMoviesTrend(): ', fetchMoviesTrend());
-    console.log('fetchMoviesTrend: ', fetchMoviesTrend);
-    console.log('res: ', res);
+    console.log('res: ', resTrends);
     console.log('error: ', error);
-    this.setState({ isLoading: true });
-    this.setState({ movies: res });
-
-    // ===============================================
-    // const res = await axios
-    //   .get(
-    //     'https://api.themoviedb.org/3/trending/movie/week?api_key=05735f479cb8263fb39295f8f94e0567',
-    //   )
-    //   .then(({ data }) => data.results);
-    // console.log('res: ', res);
-    // this.setState({ movies: res });
-    // ===============================================
+    // this.setState({ isLoading: true });
+    this.setState({ movies: resTrends });
+    // this.setState({ thisProps: this.props.match.url });
+    console.log('Home this.props.match.url is -', this.props.match.url);
+    // console.log(' thisProps -', thisProps);
   }
 
   render() {
@@ -59,7 +49,7 @@ class HomePage extends Component {
             timeout={1000}
           />
         )}
-        <MovieListHomePage movies={movies} />
+        <MovieListHomePage movies={movies} thisProps={this.props.match.url} />
       </Container>
     );
   }

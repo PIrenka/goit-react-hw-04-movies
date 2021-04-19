@@ -1,0 +1,14 @@
+.naviLinks {
+  font-size: 20px;
+  list-style: none;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-around;
+}
+.navLink {
+  color: chocolate;
+}
+
+.navLink__active {
+  color: cadetblue;
+}
