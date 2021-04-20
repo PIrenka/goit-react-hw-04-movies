@@ -8,18 +8,13 @@ class Reviews extends Component {
     err: false,
   };
   componentDidMount() {
-    // console.log('Cast componentDidMount() props: ', this.props);
-    // console.log('Cast componentDidMount() match: ', this.props.match);
-    // console.log(
-    //   'Cast componentDidMount() this.props.match.params.movieId: ',
-    //   this.props.match.params.movieId,
-    // );
+
     const { reviews } = this.state;
     const { movieId } = this.props.match.params;
 
     console.log('movieId: ', movieId);
     const resByReviews = fetchMovieByReviews(movieId)
-      // const resByReviews = fetchMovieByReviews(this.props.match.params.movieId)
+  
       .then(results =>
         this.setState({
           reviews: results,
@@ -39,7 +34,7 @@ class Reviews extends Component {
     return (
       <>
         <ul>
-          {err ? (
+          {reviews.length === 0 || err ? (
             <li key={'errorReview'}>We don't have any review for this movie</li>
           ) : (
             reviews.map(({ content, id, author }) => {

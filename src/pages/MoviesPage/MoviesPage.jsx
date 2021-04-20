@@ -11,7 +11,6 @@ class MoviesPage extends Component {
     searchQuery: '',
     // error: null,
     currentPage: 1,
-    // history:[],
   };
 
   addMovies = query => {
@@ -19,13 +18,18 @@ class MoviesPage extends Component {
       searchQuery: query,
       movies: [],
       currentPage: 1,
-      error: null,
+      err: false,
+
       //  history.push({ ...location, search: `query=${query}` }),
     });
   };
 
   componentDidUpdate(prevProps, prevState) {
-    // console.log('prevState: ', prevState);
+    // console.log(
+    //   'this.props.location.pathname in MoviePage : ',
+    //   this.props.location.pathname,
+    // );
+
     if (prevState.searchQuery !== this.state.searchQuery) {
       console.log('fetching movies by search query...');
       this.fetchMovies();
@@ -43,40 +47,36 @@ class MoviesPage extends Component {
 
     fetchMoviesByQuery(searchQuery, currentPage)
       .then(results => {
-        // console.log('results: ', results);
-        // this.setState({ isLoading: true });
-
         this.setState(prevState => ({
           movies: [...prevState.movies, ...results],
           currentPage: prevState.currentPage + 1,
         }));
       })
-      .catch(() => console.log('error in fetching MoviePage'))
-      // .catch(error => {
-      //   console.log('error: ', error);
-      //   this.setState(prevState => ({ error: { error } }));
-      // })
+      .catch(err => {
+        console.log('error in fetching MoviePage');
+        return this.setState({ err: true });
+      })
       .finally(() => this.setState({ isLoading: false }));
   };
 
   render() {
-    const { movies, isLoading, searchQuery } = this.state;
-    console.log('MoviePage this.props: ', this.props);
+    const { movies, isLoading, searchQuery, err } = this.state;
 
     return (
       <div>
-        {/* <Container> */}
-        <h1>here you can find more movies, just put the request</h1>
-        {/* </Container> */}
         <Searchbar onSubmit={this.addMovies} />
-        <Container>
-          {movies.length > 0 && <MovieListHomePage movies={movies} />}
-          {/* </Container>
-        <Container> */}
-          {movies.length > 0 && (
+
+        {movies.length > 0 && !err ? (
+          <Container>
+            <MovieListHomePage movies={movies} />
             <Button onClick={this.fetchMovies} isLoading={isLoading} />
-          )}
-        </Container>
+          </Container>
+        ) : (
+          <Container>
+            <h1>here you can find more movies, just put the request</h1>
+          </Container>
+        )}
+
         <Container>
           {movies.length === 0 && searchQuery && <p>Smth went wrong</p>}
         </Container>

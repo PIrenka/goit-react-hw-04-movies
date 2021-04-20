@@ -4,43 +4,78 @@ import React, { Component } from 'react';
 import { fetchMovieByCast } from '../../servicesApi/movie-api';
 class Cast extends Component {
   state = {
-    cast: [],
-    error: null,
+    castA: [],
+    error: false,
   };
 
-  componentDidUpdate() {
+  componentDidMount() {
     // console.log('Cast componentDidMount() match: ', this.props.match);
-    const { movieId } = this.props.match.params;
-    // console.log('movieId: ', movieId);
-    const resCastData = fetchMovieByCast(movieId);
-    console.log('resCastData: ', resCastData);
-    //   .catch(error =>
-    //   console.log('error in fetching Cast'),
-    // );
+    const { castA } = this.state;
 
-    this.setState({
-      cast: resCastData,
-    });
+    const { movieId } = this.props.match.params;
+    console.log('movieId: ', movieId);
+    // const resCastData = fetchMovieByCast(movieId)
+    fetchMovieByCast(movieId).then(results =>
+      this.setState({ castA: results }),
+    );
+    // .catch(err => {
+    //   console.log('error with fetching in Cast');
+    //   return this.setState({ err: true });
+    // });
+    // console.log('resCastData: ', resCastData);
+    console.log('castA: ', this.state);
+
+    // this.setState({
+    //   castArr: resCastData,
+    // });
   }
 
-  render() {
-    const { cast } = this.state;
-    const BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/w300/';
+  // render() {
+  //   const { castArr, err } = this.state;
+  //   const BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/w300/';
 
+  // return (
+  //   <ul>
+  //     {/* {err ? (
+  //       <li key={'errorCast'}>
+  //         <p>oops we don't have info</p>
+  //       </li>
+  //     ) : ( */}
+  //     {castArr.map(({ name, character, profile_path, id }) => (
+  //       <li key={id}>
+  //         <img
+  //           src={`${BASE_IMAGE_URL}${profile_path}`}
+  //           alt={name}
+  //           width="100"
+  //         />
+  //         <p>Name:{name}</p>
+  //         <p>Character:{character}</p>
+  //       </li>
+  //     ))}
+  //   </ul>
+  // );
+  // }
+  render() {
+    const { castA } = this.state;
     return (
-      <>
+      <div>
         <ul>
-          {cast.map(({ name, character, profile_path, id }) => {
+          {castA.map(({ name, id, profile_path }) => {
             return (
               <li key={id}>
-                <img src={`${BASE_IMAGE_URL}${profile_path}`} alt={name} />
-                <p>Name:{name}</p>
-                <p>Character:{character}</p>
+                <img
+                  width="100"
+                  src={`https://image.tmdb.org/t/p/w500/${profile_path}`}
+                  alt=""
+                />
+                <p>
+                  Name: <span>{name}</span>
+                </p>{' '}
               </li>
             );
           })}
         </ul>
-      </>
+      </div>
     );
   }
 }
