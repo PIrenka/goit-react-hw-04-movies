@@ -9,8 +9,9 @@ class MoviesPage extends Component {
   state = {
     movies: [],
     searchQuery: '',
-    error: null,
+    // error: null,
     currentPage: 1,
+    // history:[],
   };
 
   addMovies = query => {
@@ -19,6 +20,7 @@ class MoviesPage extends Component {
       movies: [],
       currentPage: 1,
       error: null,
+      //  history.push({ ...location, search: `query=${query}` }),
     });
   };
 
@@ -31,7 +33,7 @@ class MoviesPage extends Component {
   }
 
   fetchMovies = () => {
-    const { searchQuery, currentPage, error } = this.state;
+    const { searchQuery, currentPage } = this.state;
     this.setState({ isLoading: true });
 
     if (searchQuery.length <= 2) {
@@ -49,7 +51,7 @@ class MoviesPage extends Component {
           currentPage: prevState.currentPage + 1,
         }));
       })
-      .catch(({ error }) => console.log(error))
+      .catch(() => console.log('error in fetching MoviePage'))
       // .catch(error => {
       //   console.log('error: ', error);
       //   this.setState(prevState => ({ error: { error } }));
@@ -58,7 +60,8 @@ class MoviesPage extends Component {
   };
 
   render() {
-    const { movies, isLoading, searchQuery, error } = this.state;
+    const { movies, isLoading, searchQuery } = this.state;
+    console.log('MoviePage this.props: ', this.props);
 
     return (
       <div>

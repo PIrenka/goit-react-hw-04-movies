@@ -20,35 +20,34 @@ const fetchMoviesByQuery = (searchQuery, currentPage = 1) => {
     .then(({ data }) => data.results);
 };
 
-const fetchMovieById = id => {
-  return axios
+const fetchMovieById = async id =>
+  await axios
     .get(`${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`)
     .then(({ data }) => data);
-};
 
 const fetchMovieByCast = ({ id }) => {
   return axios
-    .get(`${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}&language=en-US`)
+    .get(
+      `${BASE_URL}/movie/${this.props.match.params.movieId}/credits?api_key=${API_KEY}&language=en-US`,
+    )
     .then(({ data }) => {
       console.log('data.cast: ', data.cast);
       // return data.cast;
     });
 };
 
-const fetchMovieByReviews = ({ id }) => {
-  return axios
+const fetchMovieByReviews = async id =>
+  await axios
     .get(`${BASE_URL}/movie/${id}/reviews?api_key=${API_KEY}&language=en-US`)
-    .then(({ data }) => {
-      console.log('results: ', data.results);
-      return data.results;
-    });
-  // .then(({ results }) => {
-  //   console.log('results: ', results);
-  //   return results;
-  // });
-  // .then(({ data }) => data.crew);
-};
-
+    .then(
+      ({ data }) =>
+        // console.log('results: ', data.results);
+        data.results);
+// .then(({ results }) => {
+//   console.log('results: ', results);
+//   return results;
+// });
+// .then(({ data }) => data.crew);
 export {
   fetchMoviesTrend,
   fetchMoviesByQuery,
