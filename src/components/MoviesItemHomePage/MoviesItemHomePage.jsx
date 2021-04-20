@@ -7,32 +7,21 @@ const MoviesItemHomePage = ({ movie }) => {
     title,
     original_title,
     vote_average,
-    overview,
-    genre_ids,
-    genres,
     id,
+    release_date,
   } = movie;
-  // function genresMovieShort(element) {
-  //   element.genre_ids = element.genre_ids
-  //     .map(genreMovie => (genreMovie = genres[genreMovie]))
-  //     .slice(0, 3)
-  //     .join(', ');
-  //   return element;
-  // }
-   // const movieGenres = genres.map(genre => genre.name + ' ');
+
   return (
     <div className={styles.moviesItem}>
-      <img
-        src={`${BASE_IMAGE_URL}${poster_path}`}
-        alt={`${id}-${original_title}`}
-      />
-      <h2> {title}</h2>
-      <p>User Score: {vote_average}</p>
-      {/* <h3>Overview </h3>
-      <p>{overview}</p> */}
-      <p>Genres: {genre_ids}</p>
-      {/* <p>Genres: {genres.map(genre => genre.name + ' ')}</p> */}
-      {/* <p>{genresMovieShort({ genre_ids })}</p> */}
+      <img src={`${BASE_IMAGE_URL}${poster_path}`} alt={`${id}-${title}`} />
+      <h2 className={styles.moviesItem__title}> {original_title}</h2>
+      <div className={styles.moviesItem__info}>
+        <p>
+          Score:
+          <span className={styles.moviesItem__infoData}> {vote_average}</span>
+        </p>
+        <p className={styles.moviesItem__infoData}>{release_date}</p>
+      </div>
     </div>
   );
 };

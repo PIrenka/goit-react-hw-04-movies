@@ -2,13 +2,15 @@
 
 import { Component, lazy, Suspense } from 'react';
 import { fetchMovieById } from '../../servicesApi/movie-api';
-import { NavLink, Link, Route, Switch } from 'react-router-dom';
+import { NavLink, Route, Switch } from 'react-router-dom';
 // import { BASE_IMAGE_URL } from '../../servicesApi/movie-api';
 import Container from '../../components/Container/';
 import styles from './stylesMovieDetailsPage.module.scss';
 
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+
+import MovieDetailsTemplate from '../../components/MovieDetailsTemplate';
 
 const Cast = lazy(() => import('../../components/Cast'));
 const Reviews = lazy(() => import('../../components/Reviews'));
@@ -50,18 +52,18 @@ class MovieDetailsPage extends Component {
   render() {
     const {
       id,
-      original_title,
-      genres,
-      vote_average,
-      poster_path,
-      title,
-      overview,
+      // original_title,
+      // genres,
+      // vote_average,
+      // poster_path,
+      // title,
+      // overview,
       err,
     } = this.state;
 
     console.log('fetching Movie by Id...');
 
-    const BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/w500/';
+    // const BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/w500/';
     return (
       <>
         <p className={styles.infoTitle}> Movie Details Page</p>
@@ -73,9 +75,10 @@ class MovieDetailsPage extends Component {
           {err ? (
             <h1>OOOOPPPPSSSS THERE IS AN ERROR!!!!!!!!!!!!!!!!</h1>
           ) : (
-            // {/* <MoviesItemHomePage movie={movie} /> */}
             <>
-              <div className={styles.movieContainer}>
+              <MovieDetailsTemplate movie={{ ...this.state }} />
+
+              {/* <div className={styles.movieContainer}>
                 <img
                   src={`${BASE_IMAGE_URL}${poster_path}`}
                   alt={`${id}-${title}`}
@@ -97,7 +100,7 @@ class MovieDetailsPage extends Component {
                     })}
                   </ul>
                 </div>
-              </div>
+              </div> */}
               <div>
                 <h3 className={styles.extraInfoTitle}>Aditional information</h3>
                 <NavLink to={`${this.props.match.url}/cast/${id}`}>

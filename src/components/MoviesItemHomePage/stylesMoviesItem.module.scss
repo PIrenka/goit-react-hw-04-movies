@@ -1,5 +1,5 @@
 .moviesItem {
-  background-color: cornflowerblue;
+  background-color: #aeaae7;
   color: cornsilk;
   border-radius: 4px;
   padding: 10px;
@@ -8,5 +8,17 @@
   &:focus {
     box-shadow: -3px 14px 38px 11px rgba(122, 233, 255, 0.77);
     transform: translateY(-2%);
+  }
+
+  &__title {
+    margin-top: 10px;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__infoData {
+    font-weight: 700;
   }
 }

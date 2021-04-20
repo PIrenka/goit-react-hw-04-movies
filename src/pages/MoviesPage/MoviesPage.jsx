@@ -20,6 +20,7 @@ class MoviesPage extends Component {
       currentPage: 1,
       err: false,
 
+      isLoading: false,
       //  history.push({ ...location, search: `query=${query}` }),
     });
   };

@@ -1,7 +1,8 @@
+import PropTypes from 'prop-types';
+
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import Loader from 'react-loader-spinner';
 import styles from './stylesButton.module.scss';
-import PropTypes from 'prop-types';
 
 const Button = ({ onClick, isLoading }) => {
   return (
