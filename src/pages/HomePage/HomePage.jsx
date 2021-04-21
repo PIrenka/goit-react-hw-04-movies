@@ -15,20 +15,38 @@ class HomePage extends Component {
     err: false,
   };
 
-  async componentDidMount() {
-    const resTrends = fetchMoviesTrend()
-      .then(moviesTrendData => this.setState({ movies: moviesTrendData }))
-      .catch(err => {
-        console.log('error with fetching of HomePage');
-        console.error(err);
-        return this.setState({ err: true });
-      });
-    // console.log('resTrends: ', resTrends);
-    // console.log('fetching Movies Trends...');
-
-    // const thisProps = this.props.match.url;
-    // console.log('thisProps:', thisProps);
+  componentDidMount() {
+    // const resTrends = fetchMoviesTrend()
+    //   .then(moviesTrendData => this.setState({ movies: moviesTrendData }))
+    //   .catch(err => {
+    //     console.log('error with fetching of HomePage');
+    //     console.error(err);
+    //     return this.setState({ err: true });
+    //   });
+    // console.log('resTrends: ', resTrends); // первый вариант
+    const resTrends = async () => {
+      try {
+        const moviesData = await fetchMoviesTrend();
+        this.setState({ movies: moviesData });
+      } catch (error) {
+        this.setState({ err: true });
+      }
+    };
+    resTrends();
+    // console.log(' fetchTrends(): ', fetchTrends()); // второй
   }
+  // async componentDidMount() {
+  //   try {
+  //     const moviesData = await fetchMoviesTrend();
+
+  //     this.setState({
+  //       movies: moviesData,
+  //     });
+  //   } catch (error) {
+  //     console.error('Smth wrong with homepage trends fetch', error);
+  //     this.setState({ err: true });
+  //   }
+  // } // третий
 
   render() {
     const { movies } = this.state;

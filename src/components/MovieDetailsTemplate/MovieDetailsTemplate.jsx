@@ -42,7 +42,7 @@ const MovieDetailsTemplate = ({ movie }) => {
 
 MovieDetailsTemplate.propTypes = {
   movie: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.number,
     title: PropTypes.string.isRequired,
     original_title: PropTypes.string.isRequired,
     vote_average: PropTypes.number.isRequired,

@@ -6,7 +6,6 @@ import MoviesItemHomePage from '../MoviesItemHomePage';
 import styles from './stylesMoviesList.module.scss';
 
 const MoviesList = ({ movies }) => {
-  // const { id } = movies;
   return (
     <ul className={styles.moviesList}>
       {movies.map(movie => {
@@ -27,7 +26,7 @@ const MoviesList = ({ movies }) => {
 };
 
 MoviesList.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  movies: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default MoviesList;
