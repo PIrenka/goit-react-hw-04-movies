@@ -2,19 +2,18 @@ import { Component } from 'react';
 
 import { fetchMovieByReviews } from '../../servicesApi/movie-api';
 
+import styles from './stylesReviews.module.scss';
 class Reviews extends Component {
   state = {
     reviews: [],
     err: false,
   };
   componentDidMount() {
-
     const { reviews } = this.state;
     const { movieId } = this.props.match.params;
 
     console.log('movieId: ', movieId);
     const resByReviews = fetchMovieByReviews(movieId)
-  
       .then(results =>
         this.setState({
           reviews: results,
@@ -41,7 +40,7 @@ class Reviews extends Component {
               return (
                 <li key={id}>
                   <p>Author: {author}</p>
-                  <p>{content}</p>
+                  <p className={styles.reviewText}>{content}</p>
                 </li>
               );
             })

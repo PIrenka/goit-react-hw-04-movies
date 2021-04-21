@@ -1,6 +1,8 @@
 import { BASE_IMAGE_URL } from '../../servicesApi/movie-api';
 import styles from '../../pages/MovieDetailsPage/stylesMovieDetailsPage.module.scss';
 
+import PropTypes from 'prop-types';
+
 const MovieDetailsTemplate = ({ movie }) => {
   const {
     id,
@@ -37,4 +39,22 @@ const MovieDetailsTemplate = ({ movie }) => {
     </div>
   );
 };
+
+MovieDetailsTemplate.propTypes = {
+  movie: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    original_title: PropTypes.string.isRequired,
+    vote_average: PropTypes.number.isRequired,
+    poster_path: PropTypes.string.isRequired,
+    overview: PropTypes.string.isRequired,
+    genres: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+      }).isRequired,
+    ),
+  }),
+};
+
 export default MovieDetailsTemplate;

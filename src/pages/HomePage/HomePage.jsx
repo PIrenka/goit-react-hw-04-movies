@@ -11,7 +11,7 @@ import styles from './stylesHomePage.module.scss';
 class HomePage extends Component {
   state = {
     movies: [],
-    thisProps: '',
+    // thisProps: '',
     err: false,
   };
 
@@ -24,10 +24,10 @@ class HomePage extends Component {
         return this.setState({ err: true });
       });
     // console.log('resTrends: ', resTrends);
-    console.log('fetching Movies Trends...');
+    // console.log('fetching Movies Trends...');
 
-    const thisProps = this.props.match.url;
-    console.log('thisProps:', thisProps);
+    // const thisProps = this.props.match.url;
+    // console.log('thisProps:', thisProps);
   }
 
   render() {

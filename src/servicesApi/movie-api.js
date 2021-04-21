@@ -11,13 +11,12 @@ const fetchMoviesTrend = async () =>
     .get(`${BASE_URL}/trending/movie/day?api_key=${API_KEY}`)
     .then(({ data }) => data.results);
 
-const fetchMoviesByQuery = (searchQuery, currentPage = 1) => {
-  return axios
+const fetchMoviesByQuery = async (searchQuery, currentPage = 1) =>
+  await axios
     .get(
       `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=${currentPage}&include_adult=false`,
     )
     .then(({ data }) => data.results);
-};
 
 const fetchMovieById = async id =>
   await axios

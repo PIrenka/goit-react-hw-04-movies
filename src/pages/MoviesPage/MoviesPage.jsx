@@ -1,16 +1,20 @@
 import { Component } from 'react';
 import Searchbar from '../../components/Searchbar';
 import { fetchMoviesByQuery } from '../../servicesApi/movie-api';
-import MovieListHomePage from '../../components/MoviesListHomePage';
+import MovieList from '../../components/MoviesList';
 import Container from '../../components/Container';
 import Button from '../../components/Button';
+
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import Loader from 'react-loader-spinner';
 
 class MoviesPage extends Component {
   state = {
     movies: [],
     searchQuery: '',
-    // error: null,
     currentPage: 1,
+    error: false,
+    isLoading: false,
   };
 
   addMovies = query => {
@@ -18,19 +22,13 @@ class MoviesPage extends Component {
       searchQuery: query,
       movies: [],
       currentPage: 1,
-      err: false,
+      // err: false,
 
-      isLoading: false,
-      //  history.push({ ...location, search: `query=${query}` }),
+      // isLoading: false,
     });
   };
 
   componentDidUpdate(prevProps, prevState) {
-    // console.log(
-    //   'this.props.location.pathname in MoviePage : ',
-    //   this.props.location.pathname,
-    // );
-
     if (prevState.searchQuery !== this.state.searchQuery) {
       console.log('fetching movies by search query...');
       this.fetchMovies();
@@ -66,10 +64,19 @@ class MoviesPage extends Component {
     return (
       <div>
         <Searchbar onSubmit={this.addMovies} />
+        {isLoading && (
+          <Loader
+            type="ThreeDots"
+            color="#aeaae7"
+            height={80}
+            width={80}
+            timeout={1000}
+          />
+        )}
 
         {movies.length > 0 && !err ? (
           <Container>
-            <MovieListHomePage movies={movies} />
+            <MovieList movies={movies} />
             <Button onClick={this.fetchMovies} isLoading={isLoading} />
           </Container>
         ) : (

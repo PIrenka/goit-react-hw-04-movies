@@ -1,4 +1,6 @@
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import Container from '../Container';
 
 import styles from './stylesNavMenu.module.scss';

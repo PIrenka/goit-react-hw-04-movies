@@ -1,16 +1,15 @@
-// import MoviesItemHomePage from '../../components/MoviesItemHomePage';
-
 import { Component, lazy, Suspense } from 'react';
-import { fetchMovieById } from '../../servicesApi/movie-api';
 import { NavLink, Route, Switch } from 'react-router-dom';
-// import { BASE_IMAGE_URL } from '../../servicesApi/movie-api';
+
+import { fetchMovieById } from '../../servicesApi/movie-api';
+
 import Container from '../../components/Container/';
-import styles from './stylesMovieDetailsPage.module.scss';
+import MovieDetailsTemplate from '../../components/MovieDetailsTemplate';
 
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
-import MovieDetailsTemplate from '../../components/MovieDetailsTemplate';
+import styles from './stylesMovieDetailsPage.module.scss';
 
 const Cast = lazy(() => import('../../components/Cast'));
 const Reviews = lazy(() => import('../../components/Reviews'));
@@ -18,16 +17,15 @@ const Reviews = lazy(() => import('../../components/Reviews'));
 class MovieDetailsPage extends Component {
   state = {
     movie_id: '',
+    err: false,
+    location: null,
+
     original_title: '',
     genres: [],
     vote_average: 0,
     title: '',
-
     poster_path: '',
     overview: '',
-
-    err: false,
-    location: null,
   };
 
   componentDidMount() {
@@ -39,6 +37,8 @@ class MovieDetailsPage extends Component {
         console.log('error in MovieDetailsPage');
         return this.setState({ err: true });
       });
+
+    // console.log('fetching Movie Details Info page...');
   }
 
   handleGoBack = () => {
@@ -50,70 +50,51 @@ class MovieDetailsPage extends Component {
   };
 
   render() {
-    const {
-      id,
-      // original_title,
-      // genres,
-      // vote_average,
-      // poster_path,
-      // title,
-      // overview,
-      err,
-    } = this.state;
+    const { id, err } = this.state;
 
-    console.log('fetching Movie by Id...');
-
-    // const BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/w500/';
     return (
       <>
         <p className={styles.infoTitle}> Movie Details Page</p>
         <Container>
-          <button type="button" onClick={this.handleGoBack}>
+          <button
+            type="button"
+            onClick={this.handleGoBack}
+            className={styles.btnGoBack}
+          >
             Go back
           </button>
 
           {err ? (
-            <h1>OOOOPPPPSSSS THERE IS AN ERROR!!!!!!!!!!!!!!!!</h1>
+            <h1 className={styles.errorText}>
+              OOOOPPPPSSSS THERE IS AN ERROR!!!!!!!!!!!!!!!!
+            </h1>
           ) : (
             <>
               <MovieDetailsTemplate movie={{ ...this.state }} />
 
-              {/* <div className={styles.movieContainer}>
-                <img
-                  src={`${BASE_IMAGE_URL}${poster_path}`}
-                  alt={`${id}-${title}`}
-                  className={styles.poster}
-                />
-                <div className={styles.infoContainer}>
-                  <h2> {original_title}</h2>
-                  <p>User Score: {vote_average}</p>
-                  <h3>Overview </h3>
-                  <p>{overview}</p>
-                  <p>Genres: </p>
-                  <ul className={styles.genres}>
-                    {genres.map(({ name }) => {
-                      return (
-                        <li key={id + name} className={styles.genresItem}>
-                          {name}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              </div> */}
-              <div>
+              <div className={styles.extraInfoContainer}>
                 <h3 className={styles.extraInfoTitle}>Aditional information</h3>
-                <NavLink to={`${this.props.match.url}/cast/${id}`}>
-                  <p className={styles.extraInfoText}>Cast</p>
-                </NavLink>
-                <NavLink to={`${this.props.match.url}/reviews/${id}`}>
-                  <p className={styles.extraInfoText}>Reviews</p>
-                </NavLink>
+                <div className={styles.extraInfo}>
+                  <NavLink
+                    to={`${this.props.match.url}/cast/${id}`}
+                    className={styles.navLink}
+                    activeClassName={styles.navLink__active}
+                  >
+                    <p className={styles.extraInfoText}>Cast</p>
+                  </NavLink>
+                  <NavLink
+                    to={`${this.props.match.url}/reviews/${id}`}
+                    className={styles.navLink}
+                    activeClassName={styles.navLink__active}
+                  >
+                    <p className={styles.extraInfoText}>Reviews</p>
+                  </NavLink>
+                </div>
                 <Suspense
                   fallback={
                     <Loader
-                      type="Grid"
-                      color="#00BFFF"
+                      type="ThreeDots"
+                      color="#aeaae7"
                       height={80}
                       width={80}
                       timeout={1000}
