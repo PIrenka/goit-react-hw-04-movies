@@ -30,6 +30,8 @@ class HomePage extends Component {
         this.setState({ movies: moviesData });
       } catch (error) {
         this.setState({ err: true });
+      } finally {
+        console.log('finally is done');
       }
     };
     resTrends();

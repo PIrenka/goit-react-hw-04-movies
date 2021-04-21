@@ -5,6 +5,8 @@ import MovieList from '../../components/MoviesList';
 import Container from '../../components/Container';
 import Button from '../../components/Button';
 
+import queryString from 'query-string';
+
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import Loader from 'react-loader-spinner';
 
@@ -17,6 +19,26 @@ class MoviesPage extends Component {
     isLoading: false,
   };
 
+  //==============================================
+  componentDidMount() {
+    const { search, pathname } = this.props.location;
+    const { query } = queryString.parse(search);
+
+    if (search && pathname) {
+      this.setState({
+        searchQuery: query,
+      });
+    }
+  }
+  //==============================================
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.searchQuery !== this.state.searchQuery) {
+      console.log('fetching movies by search query...');
+      this.fetchMovies();
+    }
+  }
+
   addMovies = query => {
     this.setState({
       searchQuery: query,
@@ -27,13 +49,6 @@ class MoviesPage extends Component {
       // isLoading: false,
     });
   };
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.searchQuery !== this.state.searchQuery) {
-      console.log('fetching movies by search query...');
-      this.fetchMovies();
-    }
-  }
 
   fetchMovies = () => {
     const { searchQuery, currentPage } = this.state;
